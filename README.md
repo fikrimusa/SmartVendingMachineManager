@@ -1,7 +1,7 @@
 # Smart Vending Machine Manager - Assessment
 
 ## Quick Start Instructions:
-1. Double-click `SmartVendingMachine.bat`
+1. Double-click `run.bat`
 2. Application will open directly
 
 ## What to Test:
