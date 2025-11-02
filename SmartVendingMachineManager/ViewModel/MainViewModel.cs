@@ -34,6 +34,9 @@ namespace SmartVendingMachineManager.ViewModel
 
         private int nextId = 1;
 
+        private string newMachineId;
+        public string NewMachineId { get => newMachineId; set => SetProperty(ref newMachineId, value); }
+
         public List<string> StatusOptions { get; } = new List<string>
         {
             "Offline",
@@ -217,10 +220,5 @@ namespace SmartVendingMachineManager.ViewModel
         {
             UpdateMachineCommand.NotifyCanExecuteChanged();
         }
-
-        private string newMachineId;
-
-        public string NewMachineId { get => newMachineId; set => SetProperty(ref newMachineId, value); }
-
     }
 }

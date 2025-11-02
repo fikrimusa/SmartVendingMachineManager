@@ -335,7 +335,7 @@
                     HorizontalAlignment="Right"
                     Background="DarkOrange"
                     Command="{Binding UpdateMachineCommand}"
-                    Content="💾 Update Machine"
+                    Content="💾 Update"
                     FontSize="12"
                     FontWeight="Bold"
                     Foreground="White" />
