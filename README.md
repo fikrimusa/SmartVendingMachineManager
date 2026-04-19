@@ -6,6 +6,8 @@ A WPF desktop application for managing IoT vending machines. Built with .NET 8 a
 
 Grab the latest release from the [Releases](../../releases) page — no installation required, just extract and run.
 
+> **Windows SmartScreen warning?** Click **More info** → **Run anyway**. This happens because the app is unsigned. It is safe to run.
+
 ## Run from Source
 
 **Requirements:** Windows 10/11
