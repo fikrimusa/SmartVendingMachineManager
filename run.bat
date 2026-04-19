@@ -1,5 +1,7 @@
 @echo off
-title Smart Vending Machine Manager - Setup & Run
+:: pushd assigns a temporary drive letter when run from a UNC path (e.g. \\wsl.localhost\...)
+pushd "%~dp0"
+title Smart Vending Machine Manager
 color 0A
 
 echo.
@@ -17,21 +19,30 @@ echo ===============================================
 echo.
 
 :: -----------------------------------------------
-:: STEP 1: Check for .NET 8 SDK
+:: STEP 1: Check for .NET 8 SDK, install if missing
 :: -----------------------------------------------
 echo [CHECK] Looking for .NET 8 SDK...
 dotnet --list-sdks 2>nul | findstr /B "8\." >nul
 if %ERRORLEVEL% NEQ 0 (
+    echo [INFO] .NET 8 SDK not found. Attempting to install via winget...
     echo.
-    echo [ERROR] .NET 8 SDK not found on this machine.
-    echo.
-    echo Please install it from:
-    echo   https://dotnet.microsoft.com/download/dotnet/8.0
-    echo.
-    echo After installing, re-run this script.
-    echo.
-    pause
-    exit /b 1
+    winget install --id Microsoft.DotNet.SDK.8 --silent --accept-package-agreements --accept-source-agreements
+    :: winget can return non-zero even on success (e.g. 3010 = reboot pending), so
+    :: verify by checking if dotnet is now on PATH instead of trusting the exit code.
+    :: Reload PATH from registry first so the new install is visible.
+    for /f "skip=2 tokens=3*" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path 2^>nul') do set "SYS_PATH=%%a %%b"
+    set "PATH=%SYS_PATH%;%PATH%"
+    dotnet --list-sdks 2>nul | findstr /B "8\." >nul
+    if %ERRORLEVEL% NEQ 0 (
+        echo.
+        echo [ERROR] Automatic install failed.
+        echo [INFO]  Please install .NET 8 SDK manually from:
+        echo         https://dotnet.microsoft.com/download/dotnet/8.0
+        echo         Then re-run this script.
+        echo.
+        pause
+        exit /b 1
+    )
 )
 echo [OK] .NET 8 SDK found.
 echo.
@@ -40,7 +51,7 @@ echo.
 :: STEP 2: Restore NuGet packages
 :: -----------------------------------------------
 echo [RESTORE] Downloading NuGet dependencies...
-dotnet restore "%~dp0SmartVendingMachineManager.sln" --verbosity quiet
+dotnet restore "SmartVendingMachineManager.sln" --verbosity quiet
 if %ERRORLEVEL% NEQ 0 (
     echo.
     echo [ERROR] Failed to restore packages. Check your internet connection.
@@ -55,7 +66,7 @@ echo.
 :: STEP 3: Build the project
 :: -----------------------------------------------
 echo [BUILD] Building the application...
-dotnet build "%~dp0SmartVendingMachineManager.sln" --configuration Release --verbosity quiet
+dotnet build "SmartVendingMachineManager.sln" --configuration Release --verbosity quiet
 if %ERRORLEVEL% NEQ 0 (
     echo.
     echo [ERROR] Build failed. See errors above.
@@ -73,7 +84,7 @@ echo [INFO] Launching Smart Vending Machine Manager...
 echo [INFO] Close this window after testing the application.
 echo.
 
-start "" "%~dp0SmartVendingMachineManager\bin\Release\net8.0-windows\SmartVendingMachineManager.exe"
+start "" "SmartVendingMachineManager\bin\Release\net8.0-windows\SmartVendingMachineManager.exe"
 
 echo.
 echo ===============================================
