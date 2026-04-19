@@ -1,26 +1,29 @@
 # Smart Vending Machine Manager
 
-## Requirements
-- Windows 10/11
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+A WPF desktop application for managing IoT vending machines. Built with .NET 8 and MVVM architecture.
 
-## Quick Start
-1. Install the .NET 8 SDK if not already installed (link above)
+## Download
+
+Grab the latest release from the [Releases](../../releases) page — no installation required, just extract and run.
+
+## Run from Source
+
+**Requirements:** Windows 10/11
+
+1. Clone the repository
 2. Double-click `run.bat`
-3. The script will automatically restore packages, build, and launch the app
 
-## What to Test:
+The script automatically installs .NET 8 SDK (via winget) if missing, restores packages, builds, and launches the app.
 
-### 1. Read List of Sample Vending Machines
-- View the pre-loaded vending machines in the list
-- Click on different machines to see their details
-- Observe the status indicators (Online/Offline/Needs Restock/Maintenance Required)
+## Features
 
-### 2. Add/Update/Delete Vending Machines
-- **Add**: Use the "Add New Vending Machine" section to create new vending machines
-- **Update**: Select a vending machine location at the lists, edit its details at details panel, and click "Update" to proceed or "Clear" to reset
-- **Delete**: Select a vending machine location and click "Delete"
+- **Machine Management** — Add, update, and delete vending machines with full detail tracking (ID, location, status, stock capacity)
+- **Real-time Simulation** — Machine statuses auto-update every 25 seconds; telemetry data refreshes every 8 seconds
+- **Activity Log** — Every operation is timestamped and logged automatically
+- **Error Handling** — Sending commands to offline machines is handled gracefully with descriptive error messages
 
-### 3. Observe Activity Log
-- Watch the Activity Logs section for real-time operation tracking
-- Each CRUD operation is logged with timestamps
+## Tech Stack
+
+- .NET 8 / WPF
+- MVVM pattern via [CommunityToolkit.Mvvm](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/)
+- Data binding, commands, observable properties
