@@ -1,8 +1,13 @@
 # Smart Vending Machine Manager - Assessment
 
-## Quick Start Instructions:
-1. Double-click `run.bat`
-2. Application will open directly
+## Requirements
+- Windows 10/11
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+
+## Quick Start
+1. Install the .NET 8 SDK if not already installed (link above)
+2. Double-click `run.bat`
+3. The script will automatically restore packages, build, and launch the app
 
 ## What to Test:
 
