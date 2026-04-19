@@ -1,4 +1,4 @@
-# Smart Vending Machine Manager - Assessment
+# Smart Vending Machine Manager
 
 ## Requirements
 - Windows 10/11
