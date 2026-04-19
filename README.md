@@ -27,3 +27,7 @@ The script automatically installs .NET 8 SDK (via winget) if missing, restores p
 - .NET 8 / WPF
 - MVVM pattern via [CommunityToolkit.Mvvm](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/)
 - Data binding, commands, observable properties
+
+## License
+
+MIT — see [LICENSE](LICENSE)
